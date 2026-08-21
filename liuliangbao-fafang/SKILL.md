@@ -76,7 +76,7 @@ Do not place the supplied profile URL, `url_token`, or resolved `member_id` into
 
 Use the following mapping supplied by the user, but verify the product name and amount in the form before submission because catalog IDs can change:
 
-- Account identity: `创作者`
+- Default account identity: `个人号` (the creator/personal-account path; if a form version labels the same path as `创作者`, use that equivalent). Do not leave the form's default `MCN 机构号` selected.
 - 1000 超赞包: `1705263174071357440`
 - 500 超赞包: `1705263403071967232`
 - 5000 超赞包: `1705538617643110400`
@@ -117,7 +117,7 @@ Providing a Zhihu profile URL for this workflow authorizes the complete lookup-a
 
 1. Complete the first-use intake when required. If only a profile URL was provided, run the Member ID lookup and retain the resolved `member_id` only for this operation. A unique result is a continuation trigger, not the end of the task.
 2. Open the internal Zhihu traffic-order page in Microsoft Edge and choose `发放流量券`.
-3. Select `创作者` as the receiving-account identity.
+3. Select `个人号` as the receiving-account identity. If the form opens with `MCN 机构号` selected, switch it to `个人号` before entering recipients.
 4. Choose the delivery method:
    - Single: choose `单独发放`, enter the recipient `memberId` in the field labeled like `知乎 memberId`, wait for the form to resolve the account, and verify the displayed Zhihu name/profile matches the intended recipient. Stop if it does not resolve or does not match.
    - Batch: choose `批量发放`, upload the prepared one-column `member_id` workbook, and verify the upload and user count. Do not enter a single ID into the single-recipient field as a substitute for the upload.
@@ -130,7 +130,7 @@ Providing a Zhihu profile URL for this workflow authorizes the complete lookup-a
 
 ## UI and safety notes
 
-- Re-read the current accessibility tree after each meaningful action and target controls by stable labels/roles such as `发放流量券`, `创作者`, `知乎 memberId`, `商品 ID`, `私信`, and `确定发放`. Use screenshots or coordinates only if the accessibility tree is unavailable.
+- Re-read the current accessibility tree after each meaningful action and target controls by stable labels/roles such as `发放流量券`, `个人号`, `创作者`, `知乎 memberId`, `商品 ID`, `私信`, and `确定发放`. Use screenshots or coordinates only if the accessibility tree is unavailable.
 - The current batch UI may display limits such as 1000 IDs per upload, 10000 exposure per account per day, and an operator daily cap. Treat those as live form constraints: verify the values shown at runtime rather than hard-coding them.
 - If the internal form is unavailable, authentication changes, or a permission prompt appears, stop and ask the user rather than changing access settings.
 - Treat member IDs, uploaded spreadsheets, private messages, and internal notes as non-public data. Keep them out of summaries, logs, and generated documentation unless needed for the user to verify the action. Remove temporary batch files after the upload and result check when the environment permits.
