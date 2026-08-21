@@ -47,6 +47,19 @@ For batch delivery:
 
 If the user provides profile URLs rather than IDs for a batch, resolve every URL first using the lookup workflow, require exactly one result per URL, and only then create the one-column workbook. Never silently omit an unresolved recipient.
 
+## Creator directory
+
+The optional `data/creator-directory.tsv` file is a user-provided creator directory shipped with this skill. It has the columns `member_id`, `user_name`, `remark`, and `profile_url`.
+
+When the user gives a creator nickname instead of a member ID or profile URL:
+
+1. Read the directory and match the nickname exactly after trimming surrounding whitespace.
+2. If exactly one record matches, use its `member_id` and continue directly into the normal issuance flow; do not run SQL just to re-resolve that known record.
+3. If multiple records match, stop and ask for the profile URL or another disambiguating detail. Never guess between same-nickname creators.
+4. If there is no match, ask for a Zhihu profile URL or member ID and use the normal lookup path. Do not invent a new mapping from an uncertain nickname.
+
+The directory is public because it is stored in the public GitHub repository. Do not add passwords, tokens, phone numbers, or other sensitive fields to it. Treat the listed IDs, names, remarks, and profile URLs as user-provided reference data and verify the current form recipient before submitting.
+
 ## Member ID lookup
 
 When the user supplies a Zhihu profile URL:
