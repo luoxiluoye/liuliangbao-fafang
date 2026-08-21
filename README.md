@@ -4,18 +4,19 @@
 
 ## 安装
 
-使用 Codex 的技能安装器，指定仓库根目录：
+使用 Codex 的技能安装器，指定仓库中的技能目录：
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
   --url https://github.com/luoxiluoye/liuliangbao-fafang/tree/main/liuliangbao-fafang
 ```
 
-也可以直接将此仓库克隆到 Codex skills 目录：
+也可以使用仓库和目录参数安装：
 
 ```bash
-git clone https://github.com/luoxiluoye/liuliangbao-fafang.git \
-  ~/.codex/skills/liuliangbao-fafang
+python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
+  --repo luoxiluoye/liuliangbao-fafang \
+  --path liuliangbao-fafang
 ```
 
 ## 使用说明
