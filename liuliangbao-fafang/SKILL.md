@@ -70,6 +70,18 @@ Use the following mapping supplied by the user, but verify the product name and 
 
 The quantity and internal note are business inputs. For private-message wording, follow the current [私信内容规范](https://zhihu.kdocs.cn/l/ckqfSYXL4PNb) and preserve only the placeholders and details needed for the approved message.
 
+## Exposure-to-product rule
+
+The user's requested exposure total is converted into a product ID plus a product quantity. Choose the largest available package that divides the requested total exactly, then set `商品个数 = requested_exposure / package_exposure`:
+
+| Package | Product ID | Selection rule |
+| --- | --- | --- |
+| 5000 超赞包 | `1705538617643110400` | use when the target is exactly divisible by 5000 |
+| 1000 超赞包 | `1705263174071357440` | otherwise use when the target is exactly divisible by 1000 |
+| 500 超赞包 | `1705263403071967232` | otherwise use when the target is exactly divisible by 500 |
+
+Examples: 2000 exposure → 1000-package ID, quantity 2; 1500 exposure → 500-package ID, quantity 3; 5000 exposure → 5000-package ID, quantity 1. This is an exact-total rule: do not round up, mix packages, or silently issue a different total. If the requested total is not divisible by 500, or the resulting quantity exceeds the live form limit, stop and ask how to handle it. Confirm the form's displayed product name and exposure before submitting because catalog IDs and limits can change.
+
 ## Defaults
 
 After the first-use intake is complete, or when the user explicitly asks to use the defaults:
@@ -96,7 +108,7 @@ Providing a Zhihu profile URL for this workflow authorizes the complete lookup-a
 4. Choose the delivery method:
    - Single: choose `单独发放`, enter the recipient `memberId` in the field labeled like `知乎 memberId`, wait for the form to resolve the account, and verify the displayed Zhihu name/profile matches the intended recipient. Stop if it does not resolve or does not match.
    - Batch: choose `批量发放`, upload the prepared one-column `member_id` workbook, and verify the upload and user count. Do not enter a single ID into the single-recipient field as a substitute for the upload.
-5. Enter the current product ID for the requested coupon. Unless the user specifies another product, use the current 1000-exposure product ID. Confirm the displayed product name and amount match the request.
+5. Convert the requested exposure total using the Exposure-to-product rule, enter the selected current product ID, and set `商品个数` to the calculated quotient. Unless the user specifies another product or explicitly overrides the calculation, use the largest exact-divisor package. Confirm the displayed product name and amount match the requested total.
 6. Set the product quantity to `1` by default, or to the user's specified quantity, and add the internal note when one was provided. In batch mode, these values apply to each uploaded recipient.
 7. If the user opted into a private message, fill `私信` with the exact approved message. For Zhihu digital creators, use the default template above only after the first-use intake or when the user explicitly accepts it. Preserve supported placeholders such as `{{username}}`; the same template is used for every batch recipient. Do not include passwords, tokens, or unrelated private information.
 8. If a private message is being sent, select the approved creator-assistant sender account offered by the form (the exact label may vary between `创作者小助手` and `超赞包小助手`). Use the preview to verify recipient/count, amount, quantity, reason, and any required validity-period wording.
