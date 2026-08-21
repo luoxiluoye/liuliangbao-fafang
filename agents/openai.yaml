@@ -1,0 +1,3 @@
+interface:
+  display_name: "流量包发放"
+  short_description: "根据知乎主页查询用户并发放默认或指定的知乎流量包"
