@@ -35,6 +35,10 @@ python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github
 
 skill 会校验空行和异常 ID，并按当前页面显示的上传上限处理批次；示例页面显示单个文件最多 1000 个用户 ID，但实际操作以页面实时提示为准。
 
+## 商品包换算
+
+按目标曝光量选择能整除目标的最大商品包：优先 5000 包，其次 1000 包，最后 500 包；商品个数为“目标曝光量 ÷ 单包曝光量”。例如：2000 曝光使用 1000 包、数量 2；1500 曝光使用 500 包、数量 3。目标曝光量不是 500 的整倍数时，不自动凑数或向上取整，会先暂停确认。
+
 ## 前置条件
 
 - 可使用 `data-in-cli` 和 SQL Gateway 查询 `dw_member.dw_member_pt_info`；
