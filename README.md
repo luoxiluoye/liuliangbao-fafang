@@ -8,7 +8,7 @@
 
 ```bash
 python ~/.codex/skills/.system/skill-installer/scripts/install-skill-from-github.py \
-  --url https://github.com/luoxiluoye/liuliangbao-fafang
+  --url https://github.com/luoxiluoye/liuliangbao-fafang/tree/main/liuliangbao-fafang
 ```
 
 也可以直接将此仓库克隆到 Codex skills 目录：
